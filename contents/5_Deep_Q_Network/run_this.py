@@ -17,9 +17,11 @@ def run_maze():
 
             # RL take action and get next observation and reward
             observation_, reward, done = env.step(action)
-
+            #this change leads the cost function reducing smoothly 
+            if observation_.all() == observation.all():
+                reward = -1
             RL.store_transition(observation, action, reward, observation_)
-
+                                
             if (step > 200) and (step % 5 == 0):
                 RL.learn()
 
